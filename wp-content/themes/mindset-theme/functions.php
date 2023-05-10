@@ -50,7 +50,8 @@ function fwd_setup() {
 	register_nav_menus(
 		array(
 			'header' => esc_html__( 'Header Menu Location', 'fwd' ),
-			'footer-left' => esc_html__( 'Footer - Left Side', 'fwd' )
+			'footer-left' => esc_html__( 'Footer - Left Side', 'fwd' ),
+			'footer-right' => esc_html__( 'Footer - Right Side', 'fwd' ),
 		)
 	);
 
@@ -137,9 +138,20 @@ add_action( 'after_setup_theme', 'fwd_content_width', 0 );
 function fwd_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'fwd' ),
+			'name'          => esc_html__( 'Sidebar-1', 'fwd' ),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__( 'Add widgets here.', 'fwd' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar-2', 'fwd' ),
+			'id'            => 'sidebar-2',
+			'description'   => esc_html__( 'Add more widgets here.', 'fwd' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
