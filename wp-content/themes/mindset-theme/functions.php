@@ -221,5 +221,3 @@ function fwd_excerpt_more( $more ) {
 	return $more;
 }
 add_filter( 'excerpt_more', 'fwd_excerpt_more' );
-
-
