@@ -88,6 +88,7 @@ function fwd_register_custom_post_types() {
         'menu_icon'          => 'dashicons-heart',
         'supports'           => array( 'title', 'editor' ),
         'template'           => array( array( 'core/quote' ) ),
+        'template_lock'      => 'all',
     );
     
     register_post_type( 'fwd-testimonial', $args );
