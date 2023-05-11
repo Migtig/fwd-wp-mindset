@@ -30,6 +30,7 @@
 				
 		</div><!-- .footer-menus -->
 		<div class="site-info">
+			<p><?php the_privacy_policy_link(); ?></p>
 			<?php esc_html_e( 'Created by ', 'fwd' ); ?><a href="<?php echo esc_url( __( 'https://connorfroese.ca/', 'fwd' ) ); ?>"><?php esc_html_e( 'Connor Froese', 'fwd' ); ?></a>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

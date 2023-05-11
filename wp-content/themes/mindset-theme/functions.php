@@ -46,6 +46,10 @@ function fwd_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
+	// Portait Blog Size = 200px width, 250px height, hard crop
+	add_image_size( 'portrait-blog', 200, 250, true );
+	add_image_size( 'preview-blog', 400, 200, true);
+
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(

@@ -21,9 +21,26 @@ get_header();
 			get_template_part( 'template-parts/content', 'page' );
 		?>
 
-		<section class="home-intro"></section>
+		<section class="home-intro">
+			<h2><?php esc_html_e( 'Who We Are', 'fwd' ); ?></h2>
+			<?php
+			$args = array( 'page_id' => 15 );
 
-		<section class="home-work"></section>
+			$intro_query = new WP_Query( $args );
+
+			if ( $intro_query -> have_posts() ) {
+				while ( $intro_query -> have_posts() ) {
+					$intro_query -> the_post();
+					the_content();
+				}
+				wp_reset_postdata();
+			}
+			?>
+		</section>
+
+		<section class="home-work">
+
+		</section>
 		
 
 		<?php
@@ -71,7 +88,35 @@ get_header();
 
 		<section class="home-slider"></section>
 
-		<section class="home-blog"></section>
+		<section class="home-blog">
+			<h2><?php esc_html_e( 'Latest Blog Posts', 'fwd' ); ?></h2>
+			<?php
+			$args = array(
+				'post_type'      => 'post',
+				'posts_per_page' => 4,
+			);
+
+			$blog_query = new WP_Query( $args );
+			if ( $blog_query -> have_posts() ) {
+				while ( $blog_query -> have_posts() ) {
+					$blog_query -> the_post();
+					?>
+					<article>
+						<?php
+						the_post_thumbnail( 'preview-blog' );
+						?>
+						<a href="<?php the_permalink(); ?>">
+							<h3><?php the_title(); ?></h3>
+							<?php echo( get_the_date() ); ?>
+						</a>
+
+					</article>
+					<?php
+				}
+				wp_reset_postdata();
+			}
+			?>
+		</section>
 
 
 
