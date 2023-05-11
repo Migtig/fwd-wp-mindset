@@ -1,0 +1,26 @@
+<?php
+/**
+ * Template part for outputting a random testimonial
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package FWD_Starter_Theme
+ */
+
+?>
+<?php
+$args = array(
+    'post_type'      => 'fwd-testimonial',
+    'posts_per_page' => 1,
+    'orderby'        => 'rand',
+);
+$query = new WP_Query( $args );
+if ( $query->have_posts() ) {;
+    while( $query->have_posts() ) {
+        $query->the_post();
+        the_content();
+    }
+    wp_reset_postdata();
+
+}
+?>

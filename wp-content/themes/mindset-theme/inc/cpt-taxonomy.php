@@ -190,6 +190,34 @@ function fwd_register_taxonomies() {
     );
 
     register_taxonomy( 'fwd-featured', array( 'fwd-work' ), $args );
+
+    // Add Service Type taxonomy
+    $labels = array(
+        'name'              => _x( 'Service Types', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Service Type', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Service Types' ),
+        'all_items'         => __( 'All Service Types' ),
+        'parent_item'       => __( 'Parent Service Type' ),
+        'parent_item_colon' => __( 'Parent Service Type:' ),
+        'edit_item'         => __( 'Edit Service Type' ),
+        'view_item'         => __( 'View Service Type' ),
+        'update_item'       => __( 'Update Service Type' ),
+        'add_new_item'      => __( 'Add New Service Type' ),
+        'new_item_name'     => __( 'New Service Type Name' ),
+        'menu_name'         => __( 'Service Types' ),
+    );
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_in_menu'      => true,
+        'show_in_nav_menu'  => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'service-types' ),
+    );
+    register_taxonomy( 'fwd-service-type', array( 'fwd-service' ), $args );
 }
 add_action( 'init', 'fwd_register_taxonomies');
 

@@ -24,7 +24,11 @@
 
 	<div class="entry-content">
 		<?php
-		the_content();
+		if ( function_exists( 'get_field' ) ) {
+			if ( get_field( 'description' ) ) {
+				the_field( 'description' );
+			}
+		}
 		
 		wp_link_pages(
 			array(

@@ -53,22 +53,26 @@ get_header();
 		}
 		?>
 
-		<!-- Loop to display services -->
 		<?php
 		$args = array(
-			'post_type' => 'fwd-service',
+			'post_type'      => 'fwd-service',
 			'posts_per_page' => -1,
-			'order' => 'ASC',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'fwd-service-type',
+					'field'    => 'slug',
+					'terms'    => 'design',
+				)
+			),
 		);
 		$query = new WP_Query( $args );
-
 		if ( $query->have_posts() ) {
+			echo( '<section><h2>Design</h2>');
 			while( $query->have_posts() ) {
 				$query->the_post();
 				?>
 				<article>
 					<h3><?php the_title(); ?></h3>
-					<!-- NEED TO REPLACE/FIX THIS WITH STUFF FROM DAY 5 -->
 					<?php 
 					if ( function_exists( 'get_field' ) ) {
 						if ( get_field( 'description' ) ) {
@@ -77,10 +81,43 @@ get_header();
 					}
 					?>
 				</article>
-
 				<?php
 			}
 			wp_reset_postdata();
+			echo('</section>');
+		}
+
+		$args = array(
+			'post_type'      => 'fwd-service',
+			'posts_per_page' => -1,
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'fwd-service-type',
+					'field'    => 'slug',
+					'terms'    => 'development',
+				)
+			),
+		);
+		$query = new WP_Query( $args );
+		if ( $query->have_posts() ) {
+			echo( '<section><h2>Development</h2>');
+			while( $query->have_posts() ) {
+				$query->the_post();
+				?>
+				<article>
+					<h3><?php the_title(); ?></h3>
+					<?php 
+					if ( function_exists( 'get_field' ) ) {
+						if ( get_field( 'description' ) ) {
+							the_field( 'description' );
+						}
+					}
+					?>
+				</article>
+				<?php
+			}
+			wp_reset_postdata();
+			echo('</section>');
 		}
 		?>
 

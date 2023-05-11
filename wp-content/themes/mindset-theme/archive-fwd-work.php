@@ -21,6 +21,8 @@ get_header();
 		</header><!-- .page-header -->
 
 		<?php
+
+		// Loop to display all Coding works
 		$args = array(
 			'post_type'      => 'fwd-work',
 			'posts_per_page' => -1,
@@ -51,6 +53,7 @@ get_header();
 			echo('</section>');
 		}
 
+		// Loop to display all Design works
 		$args = array(
 			'post_type'      => 'fwd-work',
 			'posts_per_page' => -1,
