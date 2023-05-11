@@ -221,3 +221,15 @@ function fwd_excerpt_more( $more ) {
 	return $more;
 }
 add_filter( 'excerpt_more', 'fwd_excerpt_more' );
+
+// Change title input for Service posts
+function wpb_change_title_text( $title ){
+	$screen = get_current_screen();
+  
+	if  ( 'fwd-service' == $screen->post_type ) {
+		 $title = 'Add Service name';
+	}
+  
+	return $title;
+}
+add_filter( 'enter_title_here', 'wpb_change_title_text' );

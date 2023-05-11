@@ -17,7 +17,7 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-		<?php
+	<?php
 		while ( have_posts() ) :
 			the_post();
 
@@ -29,6 +29,53 @@ get_header();
 			endif;
 
 		endwhile; // End of the loop.
+		?>
+
+		<!-- Loop to display links to individual service pages -->
+		<?php
+		$args = array(
+			'post_type' => 'fwd-service',
+			'posts_per_page' => -1,
+			'order' => 'ASC',
+		);
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			while( $query->have_posts() ) {
+				$query->the_post();
+				?>
+				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+				</br>
+
+				<?php
+			}
+			wp_reset_postdata();
+		}
+		?>
+
+		<!-- Loop to display services -->
+		<?php
+		$args = array(
+			'post_type' => 'fwd-service',
+			'posts_per_page' => -1,
+			'order' => 'ASC',
+		);
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			while( $query->have_posts() ) {
+				$query->the_post();
+				?>
+				<article>
+					<h3><?php the_title(); ?></h3>
+					<!-- NEED TO REPLACE/FIX THIS WITH STUFF FROM DAY 5 -->
+					<?php the_content(); ?>
+				</article>
+
+				<?php
+			}
+			wp_reset_postdata();
+		}
 		?>
 
 	</main><!-- #primary -->
