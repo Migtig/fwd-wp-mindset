@@ -222,6 +222,43 @@ function fwd_excerpt_more( $more ) {
 }
 add_filter( 'excerpt_more', 'fwd_excerpt_more' );
 
+// Add a Block Template for the Test (Blocks) Page
+function fwd_block_editor_templates() {
+    if ( isset( $_GET['post'] ) && '95' == $_GET['post'] ) {
+        $post_type_object = get_post_type_object( 'page' );
+        $post_type_object->template = array(
+            array( 
+				'core/paragraph', 
+				array( 
+					'placeholder' => 'Add your introduction here...'
+				) 
+			),
+			array( 
+				'core/heading', 
+				array( 
+					'placeholder' => 'Add your heading here...',
+					'level' => 2
+				) 
+			),
+			array( 
+				'core/image', 
+				array( 
+					'align' => 'left', 
+					'sizeSlug' => 'medium' 
+				)
+			),
+			array( 
+				'core/paragraph', 
+				array( 
+					'placeholder' => 'Add text here...'
+				) 
+			),
+        );
+        $post_type_object->template_lock = 'all';
+    }
+}
+add_action( 'init', 'fwd_block_editor_templates' );
+
 // Change title input for Service posts
 function wpb_change_title_text( $title ){
 	$screen = get_current_screen();
@@ -233,3 +270,18 @@ function wpb_change_title_text( $title ){
 	return $title;
 }
 add_filter( 'enter_title_here', 'wpb_change_title_text' );
+
+/**
+ * Remove default words from archive titles like "Category:", "Tag:", "Archives:"
+ */
+function nd_dosth_remove_default_archive_words($title) {
+    if ( is_category() ) {
+        $title = single_cat_title( '', false );
+    } elseif ( is_tag() ) {
+        $title = single_tag_title( '', false );
+    } elseif ( is_author() ) {
+        $title = '<span class="vcard">' . get_the_author() . '</span>' ;
+    }
+    return $title;
+}
+add_filter( 'get_the_archive_title', 'nd_dosth_remove_default_archive_words');

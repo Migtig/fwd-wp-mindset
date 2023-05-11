@@ -69,7 +69,13 @@ get_header();
 				<article>
 					<h3><?php the_title(); ?></h3>
 					<!-- NEED TO REPLACE/FIX THIS WITH STUFF FROM DAY 5 -->
-					<?php the_content(); ?>
+					<?php 
+					if ( function_exists( 'get_field' ) ) {
+						if ( get_field( 'description' ) ) {
+							the_field( 'description' );
+						}
+					}
+					?>
 				</article>
 
 				<?php
@@ -77,6 +83,11 @@ get_header();
 			wp_reset_postdata();
 		}
 		?>
+
+	<?php 
+	// Output links to the Work Categories
+	get_template_part( 'template-parts/work', 'categories' ); 
+	?>
 
 	</main><!-- #primary -->
 

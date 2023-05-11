@@ -20,7 +20,10 @@ if ( ! is_active_sidebar( 'sidebar-1' ) || ! is_active_sidebar( 'sidebar-2 ') ) 
 	else {
 		dynamic_sidebar( 'sidebar-1' );
 	}
-		
 	?>
-		
+	 
+	<?php 
+	// Output links to the Work Categories
+	get_template_part( 'template-parts/work', 'categories' ); 
+	?>
 </aside><!-- #secondary -->
